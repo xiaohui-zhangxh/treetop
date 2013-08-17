@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = "treetop"
-  s.version = "1.4.14"
+  s.version = "1.4.15"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Sobo", "Clifford Heath"]
   s.autorequire = "treetop"
-  s.date = "2013-06-04"
+  s.date = "2013-08-17"
   s.email = "cliffordheath@gmail.com"
   s.executables = ["tt"]
   s.extra_rdoc_files = [
@@ -28,21 +28,9 @@ Gem::Specification.new do |s|
     "doc/pitfalls_and_advanced_techniques.markdown",
     "doc/semantic_interpretation.markdown",
     "doc/site.rb",
-    "doc/site/contribute.html",
-    "doc/site/images/bottom_background.png",
-    "doc/site/images/middle_background.png",
-    "doc/site/images/paren_language_output.png",
-    "doc/site/images/pivotal.gif",
-    "doc/site/images/top_background.png",
-    "doc/site/index.html",
-    "doc/site/pitfalls_and_advanced_techniques.html",
-    "doc/site/robots.txt",
-    "doc/site/screen.css",
-    "doc/site/semantic_interpretation.html",
-    "doc/site/syntactic_recognition.html",
-    "doc/site/using_in_ruby.html",
     "doc/sitegen.rb",
     "doc/syntactic_recognition.markdown",
+    "doc/tt.1",
     "doc/using_in_ruby.markdown",
     "examples/lambda_calculus/arithmetic.rb",
     "examples/lambda_calculus/arithmetic.treetop",
@@ -120,6 +108,8 @@ Gem::Specification.new do |s|
     "spec/compiler/test_grammar.treetop",
     "spec/compiler/test_grammar.tt",
     "spec/compiler/test_grammar_do.treetop",
+    "spec/compiler/test_grammar_magic_coding.treetop",
+    "spec/compiler/test_grammar_magic_encoding.treetop",
     "spec/compiler/tt_compiler_spec.rb",
     "spec/compiler/zero_or_more_spec.rb",
     "spec/composition/a.treetop",
