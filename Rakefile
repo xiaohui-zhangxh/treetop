@@ -15,7 +15,11 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "https://github.com/cjheath/treetop"
   gem.platform = Gem::Platform::RUBY
   gem.summary = "A Ruby-based text parsing and interpretation DSL"
-  gem.files = ["LICENSE", "README.md", "Rakefile", "treetop.gemspec", "{spec,lib,bin,doc,examples}/**/*"].map{|p| Dir[p]}.flatten
+  gem.files = [
+      "LICENSE", "README.md", "Rakefile", "treetop.gemspec",
+      "{spec,lib,bin,examples}/**/*",
+      "doc/*"
+    ].map{|p| Dir[p] }.flatten
   gem.bindir = "bin"
   gem.executables = ["tt"]
   gem.require_path = "lib"
