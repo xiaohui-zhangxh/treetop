@@ -1,7 +1,7 @@
 module Test
   grammar B
     rule b
-      'b'
+      'bb'
     end
     
     rule inherit

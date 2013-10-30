@@ -5,7 +5,7 @@ module RepeatedSubruleSpec
     testing_grammar %{
       grammar Foo
         rule foo
-          a:'a' space b:'b' space 'c'
+          a:'a' space b:'b' space 'cc'
         end
 
         rule space
@@ -15,7 +15,7 @@ module RepeatedSubruleSpec
     }
   
     it "should produce a parser having sequence-numbered node accessor methods" do
-      parse("a b c") do |result|
+      parse("a b cc") do |result|
         result.should_not be_nil
         result.should respond_to(:space1)
         result.should respond_to(:space2)

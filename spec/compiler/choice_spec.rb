@@ -54,10 +54,10 @@ module ChoiceSpec
   end
 
   describe "A choice between terminals followed by a block" do  
-    testing_expression "('a'/ 'b' / 'c') { def a_method; end }"
+    testing_expression "('a'/ 'bb' / [c]) { def a_method; end }"
 
     it "extends a match of any of its subexpressions with a module created from the block" do
-      ['a', 'b', 'c'].each do |letter|
+      ['a', 'bb', 'c'].each do |letter|
         parse(letter).should respond_to(:a_method)
       end
     end
@@ -69,10 +69,10 @@ module ChoiceSpec
   end
 
   describe "a choice followed by a declared module" do  
-    testing_expression "('a'/ 'b' / 'c') <ChoiceSpec::TestModule>"
+    testing_expression "('a'/ 'bb' / [c]) <ChoiceSpec::TestModule>"
 
     it "extends a match of any of its subexpressions with a module created from the block" do
-      ['a', 'b', 'c'].each do |letter|
+      ['a', 'bb', 'c'].each do |letter|
         parse(letter).should respond_to(:a_method)
       end
     end

@@ -16,7 +16,7 @@ module GrammarCompositionSpec
     end
 
     specify "rules in C have access to rules defined in A and B" do
-      @c.parse('abc').should_not be_nil
+      @c.parse('abbc').should_not be_nil
     end
 
     specify "rules in C can override rules in A and B with super semantics" do
@@ -33,7 +33,7 @@ module GrammarCompositionSpec
     end
     
     specify "rules in F have access to rule defined in E" do
-      @f.parse('abcef').should_not be_nil
+      @f.parse('abbcef').should_not be_nil
     end
     
   end

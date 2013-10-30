@@ -11,7 +11,7 @@ module CompiledParserSpec
         end
 
         rule b
-          'b'
+          'bb'
         end
       end
     }
@@ -25,7 +25,7 @@ module CompiledParserSpec
       parser.parse('b').should be_nil
 
       # Check that the temporary-override works:
-      parser.parse('b', :root => :b).should_not be_nil
+      parser.parse('bb', :root => :b).should_not be_nil
       parser.parse('a', :root => :b).should be_nil
 
       # Check that the temporary-override isn't sticky:
@@ -33,7 +33,7 @@ module CompiledParserSpec
 
       # Try a permanent override:
       parser.root = :b
-      parser.parse('b').should_not be_nil
+      parser.parse('bb').should_not be_nil
       parser.parse('a').should be_nil
     end
 

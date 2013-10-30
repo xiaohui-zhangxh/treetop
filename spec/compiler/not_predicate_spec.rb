@@ -29,10 +29,10 @@ module NotPredicateSpec
   end
 
   describe "A !-predicated sequence" do
-    testing_expression '!("a" "b" "c")'
+    testing_expression '!("a" "b" "cc")'
 
     it "fails to parse matching input" do
-      parse('abc').should be_nil
+      parse('abcc').should be_nil
     end
   end
 end

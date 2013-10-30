@@ -47,7 +47,7 @@ module ZeroOrMoreSpec
   end
 
   describe "Zero or more of a choice" do
-    testing_expression '("a" / "b")*'
+    testing_expression '("a" / "bb")*'
 
     it "successfully parses matching input" do
       parse('abba').should_not be_nil

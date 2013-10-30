@@ -228,19 +228,19 @@ module CharacterClassSpec
   end
   
   describe "a character class mixed with other expressions" do
-    testing_expression '[A-Z] "a"'
+    testing_expression '[A-Z] "a" "bc"'
     it "lazily instantiates a node for the character" do
-      result = parse('Aa')
+      result = parse('Aabc')
       result.instance_variable_get("@elements").should include(true)
       result.elements.should_not include(true)
-      result.elements.size.should == 2
+      result.elements.size.should == 3
     end
   end
   
   describe "a character class with a node class declaration mixed with other expressions" do
-    testing_expression '([A-Z] <CharacterClassSpec::Foo>) "a"'
+    testing_expression '([A-Z] <CharacterClassSpec::Foo>) "ab"'
     it "actively generates a node for the character because it has a node class declared" do
-      result = parse('Aa')
+      result = parse('Aab')
       result.instance_variable_get("@elements").should_not include(true)
       result.elements.should_not include(true)
       result.elements.size.should == 2
@@ -248,9 +248,9 @@ module CharacterClassSpec
   end
   
   describe "a character class with a node module declaration mixed with other expressions" do
-    testing_expression '([A-Z] <CharacterClassSpec::ModFoo>) "a"'
+    testing_expression '([A-Z] <CharacterClassSpec::ModFoo>) "ab"'
     it "actively generates a node for the character because it has a node module declared" do
-      result = parse('Aa')
+      result = parse('Aab')
       result.instance_variable_get("@elements").should_not include(true)
       result.elements.should_not include(true)
       result.elements.size.should == 2
@@ -258,9 +258,9 @@ module CharacterClassSpec
   end
   
   describe "a character class with an inline block mixed with other expressions" do
-    testing_expression '([A-Z] { def a_method; end }) "a"'
+    testing_expression '([A-Z] { def a_method; end }) "ab"'
     it "actively generates a node for the character because it has an inline block" do
-      result = parse('Aa')
+      result = parse('Aab')
       result.instance_variable_get("@elements").should_not include(true)
       result.elements.should_not include(true)
       result.elements.size.should == 2
@@ -268,28 +268,28 @@ module CharacterClassSpec
   end
   
   describe "a character class with a label mixed with other expressions" do
-    testing_expression 'upper:([A-Z]) "b"'
+    testing_expression 'upper:([A-Z]) "b" "cd"'
     it "returns the correct element for the labeled expression" do
-      result = parse('Ab')
+      result = parse('Abcd')
       result.upper.text_value.should == "A"
-      result.elements.size.should == 2
+      result.elements.size.should == 3
     end
   end
   
   describe "a character class repetition mixed with other expressions" do
-    testing_expression '[A-Z]+ "a"'
+    testing_expression '[A-Z]+ "a" "bc"'
     it "lazily instantiates a node for the character" do
-      result = parse('ABCa')
+      result = parse('ABCabc')
       result.elements[0].instance_variable_get("@elements").should include(true)
       result.elements[0].elements.should_not include(true)
       result.elements[0].elements.size.should == 3
-      result.elements.size.should == 2
-      result.elements.inspect.should == %Q{[SyntaxNode offset=0, "ABC":\n  SyntaxNode offset=0, "A"\n  SyntaxNode offset=1, "B"\n  SyntaxNode offset=2, "C", SyntaxNode offset=3, "a"]}
+      result.elements.size.should == 3
+      result.elements.inspect.should == %Q{[SyntaxNode offset=0, "ABC":\n  SyntaxNode offset=0, "A"\n  SyntaxNode offset=1, "B"\n  SyntaxNode offset=2, "C", SyntaxNode offset=3, "a", SyntaxNode offset=4, "bc"]}
     end
   end
   
   describe "a character class that gets cached because of a choice" do
-    testing_expression "[A-Z] 'a' / [A-Z]"
+    testing_expression "[A-Z] 'a' 'bc' / [A-Z]"
     
     it "generates a node for the lazily-instantiated character when it is the primary node" do
       result = parse('A')
