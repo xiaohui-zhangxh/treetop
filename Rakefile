@@ -25,7 +25,6 @@ Jeweler::Tasks.new do |gem|
   gem.require_path = "lib"
   gem.autorequire = "treetop"
   gem.has_rdoc = false
-  gem.add_dependency "polyglot", ">= 0.3.1"
 end
 Jeweler::RubygemsDotOrgTasks.new
 

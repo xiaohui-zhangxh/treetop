@@ -3,8 +3,8 @@ module Treetop
     class CharacterClass < AtomicExpression
       def compile(address, builder, parent_expression = nil)
         super
-        
-        builder.if__ "has_terminal?(#{grounded_regexp(text_value)}, true, index)" do
+
+        builder.if__ "has_terminal?(@regexps[gr = #{grounded_regexp(text_value)}] ||= Regexp.new(gr), :regexp, index)" do
           if address == 0 || decorated?
             assign_result "instantiate_node(#{node_class_name},input, index...(index + 1))"
             extend_result_with_inline_module

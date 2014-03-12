@@ -4,6 +4,50 @@ module TerminalSymbolSpec
   class Foo < Treetop::Runtime::SyntaxNode
   end
 
+  describe "a terminal symbol" do
+    testing_expression "'foo'"
+
+    it "matches the input string" do
+      parse "foo", :index => 0 do |result|
+        result.should_not be_nil
+        result.interval.should == (0...3)
+        result.text_value.should == 'foo'
+      end
+    end
+
+    it "fails to match the input string other than at the start" do
+      parse " foo", :index => 0 do |result|
+        result.should be_nil
+      end
+    end
+
+    it "fails to match the input string in the wrong case" do
+      parse "Foo", :index => 0 do |result|
+        result.should be_nil
+      end
+    end
+  end
+
+  describe "a terminal symbol with case-insensitive matching" do
+    testing_expression "'foo'i"
+
+    it "matches the input string in the same case" do
+      parse "foo", :index => 0 do |result|
+        result.should_not be_nil
+        result.interval.should == (0...3)
+        result.text_value.should == 'foo'
+      end
+    end
+
+    it "matches the input string in varied case" do
+      parse "FoO", :index => 0 do |result|
+        result.should_not be_nil
+        result.interval.should == (0...3)
+        result.text_value.should == 'FoO'
+      end
+    end
+  end
+
   describe "a terminal symbol followed by a node class declaration and a block" do
     testing_expression "'foo' <TerminalSymbolSpec::Foo> { def a_method; end }"
 

@@ -92,12 +92,17 @@ module Treetop
         end
       end
 
-      def has_terminal?(terminal, regex, index)
-        if regex
+      def has_terminal?(terminal, mode, index)
+	case mode
+	when :regexp	# A Regexp has been passed in, probably a character class
+          input.index(terminal, index) == index
+	when false	# The terminal is a string which must match exactly
+          input[index, terminal.size] == terminal
+	when :insens	# The terminal is a downcased string which must match input downcased
+          input[index, terminal.size].downcase == terminal
+	when true	# Only occurs with old compiled grammars, for character classes
           rx = @regexps[terminal] ||= Regexp.new(terminal)
           input.index(rx, index) == index
-        else
-          input[index, terminal.size] == terminal
         end
       end
 
