@@ -4,7 +4,7 @@ module Treetop
       def compile(address, builder, parent_expression = nil)
         super
 	insensitive = insens.text_value.length > 0
-	str = insensitive ? string : string.downcase
+	str = insensitive ? string.downcase : string
         string_length = eval(str).length
 
         builder.if__ "has_terminal?(#{str}, #{insensitive ? ':insens' : false}, index)" do

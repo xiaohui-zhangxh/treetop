@@ -5,45 +5,45 @@ module TerminalSymbolSpec
   end
 
   describe "a terminal symbol" do
-    testing_expression "'foo'"
+    testing_expression "'Foo'"
 
     it "matches the input string" do
-      parse "foo", :index => 0 do |result|
+      parse "Foo", :index => 0 do |result|
         result.should_not be_nil
         result.interval.should == (0...3)
-        result.text_value.should == 'foo'
+        result.text_value.should == 'Foo'
       end
     end
 
     it "fails to match the input string other than at the start" do
-      parse " foo", :index => 0 do |result|
+      parse " Foo", :index => 0 do |result|
         result.should be_nil
       end
     end
 
     it "fails to match the input string in the wrong case" do
-      parse "Foo", :index => 0 do |result|
+      parse "foo", :index => 0 do |result|
         result.should be_nil
       end
     end
   end
 
   describe "a terminal symbol with case-insensitive matching" do
-    testing_expression "'foo'i"
+    testing_expression "'Foo'i"
 
     it "matches the input string in the same case" do
-      parse "foo", :index => 0 do |result|
+      parse "Foo", :index => 0 do |result|
         result.should_not be_nil
         result.interval.should == (0...3)
-        result.text_value.should == 'foo'
+        result.text_value.should == 'Foo'
       end
     end
 
     it "matches the input string in varied case" do
-      parse "FoO", :index => 0 do |result|
+      parse "foO", :index => 0 do |result|
         result.should_not be_nil
         result.interval.should == (0...3)
-        result.text_value.should == 'FoO'
+        result.text_value.should == 'foO'
       end
     end
   end
