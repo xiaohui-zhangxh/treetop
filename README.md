@@ -46,7 +46,9 @@ Users of *regular expressions* will find parsing expressions familiar. They shar
 
 Terminal Symbols
 ----------------
-The expression in the grammar above is a terminal symbol. It will only match a string that matches it exactly. There are two other kinds of terminal symbols, which we'll revisit later. Terminals are called *atomic expressions* because they aren't composed of smaller expressions. A terminal symbol may use either double or single quotes. If the closing quote is immediately followed by the character 'i', the string is matched without case-sensitivity, that is, the input.downcase matches the terminal.downcase
+The expression in the grammar above is a terminal symbol. It will only match a string that matches it exactly. There are two other kinds of terminal symbols, which we'll revisit later. Terminals are called *atomic expressions* because they aren't composed of smaller expressions. A terminal symbol may use either double or single quotes. If the closing quote is immediately followed by the modifier 'i', the string is matched without case-sensitivity, that is, the input.downcase matches the terminal.downcase
+
+Treetop now also supports regular expressions as terminals. Use a string as before, but append the modifier character 'r' (you can combine this with 'i' to get case-insensitive regular expressions). Regular expressions are generally faster than the equivalent parsing expressions, but may have polynomial worst-case behaviour, which is worse than parsing expressions. Your regular expression will always be anchored (by prepending \A) to test the current location of the input, so some special expressions like \b for word boundaries may give unexpected results.
 
 Ordered Choices
 ---------------

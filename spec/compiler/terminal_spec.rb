@@ -112,14 +112,59 @@ module TerminalSymbolSpec
     end
   end
 
-  describe "a transient terminal symbol" do
-    testing_expression "~'foo'"
+  describe "a terminal regexp" do
+    testing_expression "'Fo+'r"
 
-    it "returns true upon parsing matching input prefixes at various indices" do
-      pending "transient terminal expressions"
-      parse("foo", :index => 0).should be_true
-      parse("-foo", :index => 1).should be_true
-      parse("---foo", :index => 3).should be_true
+    it "matches the input string" do
+      parse "Fooo", :index => 0 do |result|
+        result.should_not be_nil
+        result.interval.should == (0...4)
+        result.text_value.should == 'Fooo'
+      end
+    end
+
+    it "fails to match the input string other than at the start" do
+      parse " Foo", :index => 0 do |result|
+        result.should be_nil
+      end
+    end
+
+    it "fails to match the input string in the wrong case" do
+      parse "foo", :index => 0 do |result|
+        result.should be_nil
+      end
     end
   end
+
+  describe "a case-insensitive terminal regexp" do
+    testing_expression "'Fo+'ri"
+
+    it "matches the input string in the same case" do
+      parse "Fooo", :index => 0 do |result|
+        result.should_not be_nil
+        result.interval.should == (0...4)
+        result.text_value.should == 'Fooo'
+      end
+    end
+
+    it "matches the input string in the same case" do
+      parse "foOo", :index => 0 do |result|
+        result.should_not be_nil
+        result.interval.should == (0...4)
+        result.text_value.should == 'foOo'
+      end
+    end
+  end
+
+#  Transient symbols were part of some idea of Nathan's that I no longer recall
+#  describe "a transient terminal symbol" do
+#    testing_expression "~'foo'"
+#
+#    it "returns true upon parsing matching input prefixes at various indices" do
+#      pending "transient terminal expressions"
+#      parse("foo", :index => 0).should be_true
+#      parse("-foo", :index => 1).should be_true
+#      parse("---foo", :index => 3).should be_true
+#    end
+#  end
 end

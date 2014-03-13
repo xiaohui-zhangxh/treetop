@@ -389,7 +389,7 @@ module Treetop
       end
 
       rule quoted_string
-        qs:(single_quoted_string / double_quoted_string) insens:'i'? <Terminal> {
+        qs:(single_quoted_string / double_quoted_string) modifiers:([ir]*) <Terminal> {
           def string
             qs.text_value
           end
