@@ -31,7 +31,10 @@ module GrammarSpec
     end
 
     it "fails if it does not parse all input" do
-      parse('barbarbazbaz').should be_nil
+      parse('barbarbazbaz') do |result|
+	result.should be_nil
+	parser.terminal_failures.size.should == 1
+      end
     end
 
     it "mixes in included modules" do

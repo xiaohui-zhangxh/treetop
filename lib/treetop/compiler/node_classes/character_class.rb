@@ -14,9 +14,13 @@ module Treetop
           builder << "@index += 1"  # Always one character
         end
         builder.else_ do
-          builder << "terminal_parse_failure(#{single_quote('['+characters+']')})"
+          builder << "terminal_parse_failure(#{expected})"
           assign_result 'nil'
         end
+      end
+
+      def expected
+	single_quote('['+characters+']')
       end
 
       def grounded_regexp(string)

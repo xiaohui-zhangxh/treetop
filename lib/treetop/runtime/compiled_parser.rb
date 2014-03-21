@@ -17,7 +17,12 @@ module Treetop
         @index = options[:index] if options[:index]
         result = send("_nt_#{options[:root] || root}")
         should_consume_all = options.include?(:consume_all_input) ? options[:consume_all_input] : consume_all_input?
-        return nil if (should_consume_all && index != input.size)
+	if (should_consume_all && index != input.size)
+	  if index > max_terminal_failure_index	# Otherwise the failure is already explained
+	    terminal_parse_failure('<END OF INPUT>', true)
+	  end
+	  return nil
+	end
         return SyntaxNode.new(input, index...(index + 1)) if result == true
         return result
       end
@@ -34,15 +39,16 @@ module Treetop
         @terminal_failures && input.column_of(failure_index)
       end
 
+      OtherThan = 'something other than '
       def failure_reason
         return nil unless (tf = terminal_failures) && tf.size > 0
         "Expected " +
           (tf.size == 1 ?
-           tf[0].expected_string :
-                 "one of #{tf.map{|f| f.expected_string}.uniq*', '}"
+           (tf[0].unexpected ? OtherThan : '')+tf[0].expected_string :
+                 "one of #{tf.map{|f| (f.unexpected ? OtherThan : '')+f.expected_string}.uniq*', '}"
           ) +
                 " at line #{failure_line}, column #{failure_column} (byte #{failure_index+1})" +
-                " after #{input[index...failure_index]}"
+                (failure_index > 0 ? " after #{input[index...failure_index]}" : '')
       end
 
       def terminal_failures
@@ -106,13 +112,13 @@ module Treetop
         end
       end
 
-      def terminal_parse_failure(expected_string)
+      def terminal_parse_failure(expected_string, unexpected = false)
         return nil if index < max_terminal_failure_index
         if index > max_terminal_failure_index
           @max_terminal_failure_index = index
           @terminal_failures = []
         end
-        @terminal_failures << [index, expected_string]
+        @terminal_failures << [index, expected_string, unexpected]
         return nil
       end
     end

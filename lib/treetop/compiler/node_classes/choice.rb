@@ -28,6 +28,10 @@ module Treetop
           end
         end
       end
+
+      def expected
+	'(any alternative)'
+      end
     end
   end
 end

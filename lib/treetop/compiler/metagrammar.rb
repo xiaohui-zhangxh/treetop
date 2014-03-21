@@ -21,7 +21,7 @@ module Treetop
           elements[0]
         end
 
-        def prefix
+        def spacing
           elements[1]
         end
 
@@ -36,7 +36,7 @@ module Treetop
 
       module TreetopFile2
         def compile
-          requires.text_value + prefix.text_value + module_or_grammar.compile + suffix.text_value
+          requires.text_value + spacing.text_value + module_or_grammar.compile + suffix.text_value
         end
       end
 
@@ -118,7 +118,7 @@ module Treetop
       end
 
       module RequireStatement0
-        def prefix
+        def spacing
           elements[0]
         end
 
@@ -159,6 +159,7 @@ module Treetop
                 r5 = true
                 @index += 1
               else
+                terminal_parse_failure('[ \\t]')
                 r5 = nil
               end
               if r5
@@ -181,6 +182,7 @@ module Treetop
                   r7 = true
                   @index += 1
                 else
+                  terminal_parse_failure('[^\\n\\r]')
                   r7 = nil
                 end
                 if r7
@@ -201,6 +203,7 @@ module Treetop
                   r8 = true
                   @index += 1
                 else
+                  terminal_parse_failure('[\\n\\r]')
                   r8 = nil
                 end
                 s0 << r8
@@ -281,7 +284,7 @@ module Treetop
       end
 
       module ModuleDeclaration4
-        def prefix
+        def module_prefix
           elements[0]
         end
 
@@ -296,11 +299,11 @@ module Treetop
 
       module ModuleDeclaration5
         def compile
-          prefix.text_value + module_contents.compile + suffix.text_value
+          module_prefix.text_value + module_contents.compile + suffix.text_value
         end
 
 	  def parser_name
-	    prefix.name.text_value+'::'+module_contents.parser_name
+	    module_prefix.name.text_value+'::'+module_contents.parser_name
 	  end
       end
 
@@ -334,6 +337,7 @@ module Treetop
               r5 = true
               @index += 1
             else
+              terminal_parse_failure('[A-Z]')
               r5 = nil
             end
             s4 << r5
@@ -366,6 +370,7 @@ module Treetop
                       r11 = true
                       @index += 1
                     else
+                      terminal_parse_failure('[A-Z]')
                       r11 = nil
                     end
                     s9 << r11
@@ -617,6 +622,7 @@ module Treetop
           r1 = true
           @index += 1
         else
+          terminal_parse_failure('[A-Z]')
           r1 = nil
         end
         s0 << r1
@@ -829,6 +835,7 @@ module Treetop
               r3 = true
               @index += 1
             else
+              terminal_parse_failure('[A-Z]')
               r3 = nil
             end
             s0 << r3
@@ -1425,7 +1432,7 @@ module Treetop
           elements[0]
         end
 
-        def predicate_block
+        def atomic
           elements[2]
         end
       end
@@ -1435,7 +1442,7 @@ module Treetop
           prefix.compile(address, builder, self)
         end
         def prefixed_expression
-          predicate_block
+          atomic
         end
         def inline_modules
           []
@@ -1939,7 +1946,7 @@ module Treetop
           elements[0]
         end
 
-        def predicate_block
+        def atomic
           elements[2]
         end
       end
@@ -1949,7 +1956,7 @@ module Treetop
           prefix.compile(address, builder, self)
         end
         def prefixed_expression
-          predicate_block
+          atomic
         end
         def inline_modules
           []
@@ -2281,6 +2288,7 @@ module Treetop
               r4 = true
               @index += 1
             else
+              terminal_parse_failure('[0-9]')
               r4 = nil
             end
             if r4
@@ -2307,6 +2315,7 @@ module Treetop
                   r7 = true
                   @index += 1
                 else
+                  terminal_parse_failure('[0-9]')
                   r7 = nil
                 end
                 if r7
@@ -2665,6 +2674,7 @@ module Treetop
               r5 = true
               @index += 1
             else
+              terminal_parse_failure('[ir]')
               r5 = nil
             end
             if r5
@@ -3696,6 +3706,7 @@ module Treetop
                 r7 = true
                 @index += 1
               else
+                terminal_parse_failure('[{}]')
                 r7 = nil
               end
               if r7
@@ -3891,6 +3902,7 @@ module Treetop
           r0 = instantiate_node(SyntaxNode,input, index...(index + 1))
           @index += 1
         else
+          terminal_parse_failure('[A-Za-z_]')
           r0 = nil
         end
 
@@ -3920,6 +3932,7 @@ module Treetop
             r2 = true
             @index += 1
           else
+            terminal_parse_failure('[0-9]')
             r2 = nil
           end
           if r2
@@ -4081,6 +4094,7 @@ module Treetop
           r0 = instantiate_node(SyntaxNode,input, index...(index + 1))
           @index += 1
         else
+          terminal_parse_failure('[ \\t\\n\\r]')
           r0 = nil
         end
 

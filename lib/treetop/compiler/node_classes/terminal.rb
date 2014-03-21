@@ -32,9 +32,13 @@ module Treetop
           builder << "@index += match_len"
         end
         builder.else_ do
-          builder << "terminal_parse_failure(#{string})"
+          builder << "terminal_parse_failure(#{expected})"
           assign_result 'nil'
         end
+      end
+
+      def expected
+	string
       end
     end
   end

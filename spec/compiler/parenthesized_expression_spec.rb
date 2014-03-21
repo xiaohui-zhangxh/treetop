@@ -13,7 +13,10 @@ module ParenthesizedExpressionSpec
     testing_expression '(!"foo")'
   
     it "should behave as normal" do
-      parse('foo').should be_nil
+      parse('foo') do |result|
+	result.should be_nil
+	parser.terminal_failures.size.should == 1
+      end
     end
   end
 end

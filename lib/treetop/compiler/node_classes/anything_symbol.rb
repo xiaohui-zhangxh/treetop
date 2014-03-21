@@ -17,6 +17,10 @@ module Treetop
           assign_result 'nil'
         end
       end
+
+      def expected
+	'any character'
+      end
     end
   end
 end

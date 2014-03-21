@@ -17,7 +17,7 @@ module SemanticPredicateSpec
       parse('foo', :consume_all_input => false) do |result|
         result.should be_nil
         terminal_failures = parser.terminal_failures
-        terminal_failures.size.should == 0
+	terminal_failures.size.should == 1
       end
     end
 
@@ -44,7 +44,7 @@ module SemanticPredicateSpec
         result.should be_nil
         $value.should == 'prior '
         terminal_failures = parser.terminal_failures
-        terminal_failures.size.should == 0
+	terminal_failures.size.should == 1
       end
     end
 
@@ -63,13 +63,13 @@ module SemanticPredicateSpec
       end
     end
 
-    it "fails with no terminal_failures if the block returns false" do
+    it "fails with one terminal_failure if the block returns false" do
       $ok_to_succeed = false
       parse('prior foo', :consume_all_input => false) do |result|
         result.should be_nil
         $value.should == 'prior '
         terminal_failures = parser.terminal_failures
-        terminal_failures.size.should == 0
+	terminal_failures.size.should == 1
       end
     end
 
@@ -78,10 +78,12 @@ module SemanticPredicateSpec
       parse('foo', :consume_all_input => false) do |result|
         result.should be_nil
         terminal_failures = parser.terminal_failures
-        terminal_failures.size.should == 1
-        failure = terminal_failures[0]
-        failure.index.should == 0
-        failure.expected_string.should == 'prior '
+	# We should get "prior " failed, and also the predicate block
+        terminal_failures.size.should == 2
+        terminal_failures[0].index.should == 0
+        terminal_failures[0].expected_string.should == 'prior '
+        terminal_failures[1].index.should == 0
+        terminal_failures[1].expected_string.should == '<semantic predicate>'
       end
     end
 
@@ -103,7 +105,7 @@ module SemanticPredicateSpec
       parse('foo', :consume_all_input => false) do |result|
         result.should be_nil
         terminal_failures = parser.terminal_failures
-        terminal_failures.size.should == 0
+	terminal_failures.size.should == 1
       end
     end
 
@@ -130,7 +132,7 @@ module SemanticPredicateSpec
         result.should be_nil
         $value.should == 'prior '
         terminal_failures = parser.terminal_failures
-        terminal_failures.size.should == 0
+	terminal_failures.size.should == 1
       end
     end
 
@@ -149,13 +151,13 @@ module SemanticPredicateSpec
       end
     end
 
-    it "fails with no terminal_failures if the block returns true" do
+    it "fails with one terminal_failure if the block returns true" do
       $ok_to_succeed = true
       parse('prior foo', :consume_all_input => false) do |result|
         result.should be_nil
         $value.should == 'prior '
         terminal_failures = parser.terminal_failures
-        terminal_failures.size.should == 0
+	terminal_failures.size.should == 1
       end
     end
 
@@ -164,10 +166,9 @@ module SemanticPredicateSpec
       parse('foo', :consume_all_input => false) do |result|
         result.should be_nil
         terminal_failures = parser.terminal_failures
-        terminal_failures.size.should == 1
-        failure = terminal_failures[0]
-        failure.index.should == 0
-        failure.expected_string.should == 'prior '
+        terminal_failures.size.should == 2
+        terminal_failures[0].index.should == 0
+        terminal_failures[0].expected_string.should == 'prior '
       end
     end
 

@@ -83,7 +83,7 @@ module CompiledParserSpec
 
     it "provides #failure_reason, #failure_column, and #failure_line when there is a parse failure" do
       parser.parse('z').should be_nil
-      parser.failure_reason.should == "Expected one of a, b, c at line 1, column 1 (byte 1) after "
+      parser.failure_reason.should == "Expected one of a, b, c at line 1, column 1 (byte 1)"
       parser.failure_line.should == 1
       parser.failure_column.should == 1
     end

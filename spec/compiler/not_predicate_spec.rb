@@ -5,7 +5,21 @@ module NotPredicateSpec
     testing_expression '!"foo"'
 
     it "fails to parse input matching the terminal symbol" do
-      parse('foo').should be_nil
+      parse('foo') do |result|
+	result.should be_nil
+	parser.terminal_failures.size.should == 1
+      end
+    end
+  end
+
+  describe "A !-predicated character class symbol" do
+    testing_expression '![aeiou]'
+
+    it "fails to parse input matching the terminal symbol" do
+      parse('e') do |result|
+	result.should be_nil
+	parser.terminal_failures.size.should == 1
+      end
     end
   end
 
@@ -20,10 +34,7 @@ module NotPredicateSpec
       parse('foo') do |result|
         result.should_not be_nil
         terminal_failures = parser.terminal_failures
-        terminal_failures.size.should == 1
-        failure = terminal_failures.first
-        failure.index.should == 3
-        failure.expected_string.should == 'bar'
+        terminal_failures.size.should == 0
       end
     end
   end
@@ -32,7 +43,10 @@ module NotPredicateSpec
     testing_expression '!("a" "b" "cc")'
 
     it "fails to parse matching input" do
-      parse('abcc').should be_nil
+      parse('abcc') do |result|
+	result.should be_nil
+	parser.terminal_failures.size.should == 1
+      end
     end
   end
 end

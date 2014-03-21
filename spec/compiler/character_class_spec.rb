@@ -21,7 +21,10 @@ module CharacterClassSpec
     end
 
     it "does not match single characters outside of that range" do
-      parse('8').should be_nil
+      parse('8') do |result|
+	result.should be_nil
+	parser.terminal_failures.size.should == 1
+      end
       parse('a').should be_nil
     end
 
