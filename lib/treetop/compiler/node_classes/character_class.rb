@@ -14,7 +14,7 @@ module Treetop
           builder << "@index += 1"  # Always one character
         end
         builder.else_ do
-          # "terminal_parse_failure(#{single_quote(characters)})"
+          builder << "terminal_parse_failure(#{single_quote('['+characters+']')})"
           assign_result 'nil'
         end
       end
