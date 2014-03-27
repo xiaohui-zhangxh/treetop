@@ -34,7 +34,7 @@ module SequenceSpec
         terminal_failures.size.should == 1
         failure = terminal_failures.first
         failure.index.should == 6
-        failure.expected_string.should == 'bar'
+        failure.expected_string.should == '"bar"'
       end
     end
   end

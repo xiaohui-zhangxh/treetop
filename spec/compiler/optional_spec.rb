@@ -17,7 +17,7 @@ module OptionalSpec
         terminal_failures.size.should == 1
         failure = terminal_failures.first
         failure.index.should == 0
-        failure.expected_string.should == 'foo'
+        failure.expected_string.should == '"foo"'
       end
     end
   
@@ -30,7 +30,7 @@ module OptionalSpec
         terminal_failures.size.should == 1
         failure = terminal_failures.first
         failure.index.should == 0
-        failure.expected_string.should == 'foo'
+        failure.expected_string.should == '"foo"'
       end
     end
   end

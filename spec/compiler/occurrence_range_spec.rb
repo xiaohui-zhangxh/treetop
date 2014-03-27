@@ -80,7 +80,7 @@ module OccurrenceRangeSpec
         terminal_failures.size.should == 1
         failure = terminal_failures.first
         failure.index.should == 0
-        failure.expected_string.should == 'foo'
+        failure.expected_string.should == '"foo"'
       end
     end
 
@@ -92,7 +92,7 @@ module OccurrenceRangeSpec
         terminal_failures.size.should == 1
         failure = terminal_failures.first
         failure.index.should == 3
-        failure.expected_string.should == 'foo'
+        failure.expected_string.should == '"foo"'
       end
     end
 
@@ -138,7 +138,7 @@ module OccurrenceRangeSpec
         terminal_failures.size.should == 1
         failure = terminal_failures.first
         failure.index.should == 0
-        failure.expected_string.should == 'foo'
+        failure.expected_string.should == '"foo"'
       end
     end
 
@@ -150,7 +150,7 @@ module OccurrenceRangeSpec
         terminal_failures.size.should == 1
         failure = terminal_failures.first
         failure.index.should == 3
-        failure.expected_string.should == 'foo'
+        failure.expected_string.should == '"foo"'
       end
     end
 
@@ -164,7 +164,7 @@ module OccurrenceRangeSpec
         terminal_failures.size.should == 1
         failure = terminal_failures.first
         failure.index.should == 6
-        failure.expected_string.should == 'foo'
+        failure.expected_string.should == '"foo"'
       end
     end
 
@@ -178,7 +178,7 @@ module OccurrenceRangeSpec
         terminal_failures.size.should == 1
         failure = terminal_failures.first
         failure.index.should == 12
-        failure.expected_string.should == 'foo'
+        failure.expected_string.should == '"foo"'
       end
     end
   end

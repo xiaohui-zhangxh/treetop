@@ -81,7 +81,7 @@ module SemanticPredicateSpec
 	# We should get "prior " failed, and also the predicate block
         terminal_failures.size.should == 2
         terminal_failures[0].index.should == 0
-        terminal_failures[0].expected_string.should == 'prior '
+        terminal_failures[0].expected_string.should == '"prior "'
         terminal_failures[1].index.should == 0
         terminal_failures[1].expected_string.should == '<semantic predicate>'
       end
@@ -168,7 +168,7 @@ module SemanticPredicateSpec
         terminal_failures = parser.terminal_failures
         terminal_failures.size.should == 2
         terminal_failures[0].index.should == 0
-        terminal_failures[0].expected_string.should == 'prior '
+        terminal_failures[0].expected_string.should == '"prior "'
       end
     end
 

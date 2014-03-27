@@ -15,7 +15,7 @@ describe "An expression for braces surrounding zero or more letters followed by 
       terminal_failures.size.should == 1      
       failure = terminal_failures[0]
       failure.index.should == 6
-      failure.expected_string.should == ';'
+      failure.expected_string.should == "';'"
     end
   end
 end

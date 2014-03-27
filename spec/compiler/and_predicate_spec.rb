@@ -29,7 +29,7 @@ module AndPredicateSpec
         terminal_failures.size.should == 1
         failure = terminal_failures[0]
         failure.index.should == 3
-        failure.expected_string.should == 'bar'
+        failure.expected_string.should == '"bar"'
       end
     end
   end

@@ -30,7 +30,7 @@ module Treetop
       end
 
       def expected
-	'(any alternative)'
+	'"(any alternative)"'
       end
     end
   end

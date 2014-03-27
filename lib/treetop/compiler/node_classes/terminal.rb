@@ -38,7 +38,7 @@ module Treetop
       end
 
       def expected
-	string
+	single_quote(string)
       end
     end
   end

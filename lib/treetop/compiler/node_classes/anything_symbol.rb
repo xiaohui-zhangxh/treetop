@@ -19,7 +19,7 @@ module Treetop
       end
 
       def expected
-	'any character'
+	'"any character"'
       end
     end
   end

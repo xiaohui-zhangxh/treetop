@@ -23,7 +23,7 @@ module ChoiceSpec
       terminal_failures = parser.terminal_failures
       terminal_failures.size.should == 1
       failure = terminal_failures[0]
-      failure.expected_string.should == 'foo'
+      failure.expected_string.should == '"foo"'
       failure.index.should == 0
     end
   

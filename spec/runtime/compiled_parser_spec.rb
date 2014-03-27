@@ -83,7 +83,7 @@ module CompiledParserSpec
 
     it "provides #failure_reason, #failure_column, and #failure_line when there is a parse failure" do
       parser.parse('z').should be_nil
-      parser.failure_reason.should == "Expected one of a, b, c at line 1, column 1 (byte 1)"
+      parser.failure_reason.should == "Expected one of 'a', 'b', 'c' at line 1, column 1 (byte 1)"
       parser.failure_line.should == 1
       parser.failure_column.should == 1
     end
@@ -110,14 +110,14 @@ module CompiledParserSpec
       terminal_failures.size.should == 1
       failure = terminal_failures.first
       failure.index.should == 1
-      failure.expected_string.should == 'b'
+      failure.expected_string.should == "'b'"
 
       parser.parse('b')
       terminal_failures = parser.terminal_failures
       terminal_failures.size.should == 1
       failure = terminal_failures.first
       failure.index.should == 0
-      failure.expected_string.should == 'a'
+      failure.expected_string.should == "'a'"
     end
   end
 end
