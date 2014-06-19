@@ -3,7 +3,6 @@
 *.iws
 *.ipr
 website/*.html
-website/new
 benchmark/*.dat
 benchmark/*.log
 *~
