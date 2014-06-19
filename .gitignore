@@ -2,7 +2,8 @@
 *.iml
 *.iws
 *.ipr
-doc/site/*.html
+website/*.html
+website/new
 benchmark/*.dat
 benchmark/*.log
 *~
