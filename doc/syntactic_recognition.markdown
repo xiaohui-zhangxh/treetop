@@ -39,7 +39,7 @@ Treetop will emit a module called `GrammarName` and a parser class called `Gramm
 #Parsing Expressions
 Each rule associates a name with a _parsing expression_. Parsing expressions are a generalization of vanilla regular expressions. Their key feature is the ability to reference other expressions in the grammar by name.
 
-Treetop parsers will try to match the first rule defined in the grammer, unless you pass an optional parameter to set a different top rule.
+Treetop parsers will try to match the first rule defined in the grammar, unless you pass an optional parameter to set a different top rule.
 
 ##Terminal Symbols
 ###Strings
