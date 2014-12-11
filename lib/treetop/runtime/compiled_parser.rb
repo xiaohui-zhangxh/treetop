@@ -94,7 +94,7 @@ module Treetop
 
       def has_terminal?(terminal, regex, index)
         if regex
-          rx = @regexps[terminal] ||= Regexp.new(terminal)
+          rx = @regexps[terminal] ||= build_regexp(terminal)
           input.index(rx, index) == index
         else
           input[index, terminal.size] == terminal
@@ -109,6 +109,13 @@ module Treetop
         end
         @terminal_failures << [index, expected_string]
         return nil
+      end
+
+      def build_regexp(str)
+        Regexp.new(str)
+      rescue RegexpError => e
+        return Regexp.new(str, nil, 'n') if e.message =~ /invalid multibyte escape:/
+        raise e
       end
     end
   end
