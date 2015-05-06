@@ -15,6 +15,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "https://github.com/cjheath/treetop"
   gem.platform = Gem::Platform::RUBY
   gem.summary = "A Ruby-based text parsing and interpretation DSL"
+  gem.description = "A Parsing Expression Grammar (PEG) Parser generator DSL for Ruby"
   gem.files = [
       "LICENSE", "README.md", "Rakefile", "treetop.gemspec",
       "{spec,lib,bin,examples}/**/*",
@@ -23,7 +24,6 @@ Jeweler::Tasks.new do |gem|
   gem.bindir = "bin"
   gem.executables = ["tt"]
   gem.require_path = "lib"
-  gem.autorequire = "treetop"
   gem.has_rdoc = false
 end
 Jeweler::RubygemsDotOrgTasks.new
