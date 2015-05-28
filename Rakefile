@@ -43,6 +43,13 @@ file 'lib/treetop/compiler/metagrammar.treetop' do |t|
   Treetop::Compiler::GrammarCompiler.new.compile(METAGRAMMAR_PATH)
 end
 
+task :rebuild do
+  $:.unshift "lib"
+  require './lib/treetop'
+  load File.expand_path('../lib/treetop/compiler/metagrammar.rb', __FILE__)
+  Treetop::Compiler::GrammarCompiler.new.compile('lib/treetop/compiler/metagrammar.treetop')
+end
+
 task :version do
   puts RUBY_VERSION
 end
