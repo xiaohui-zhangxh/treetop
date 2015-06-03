@@ -215,3 +215,6 @@ tried at which locations in the input, and what the result was. This process, ca
 requires that the rule would produce the same result (if run again) as it produced the first time when
 the result was remembered. If you violate this principle in your semantic predicates, be prepared to
 fight Cerberus before you're allowed out of Hades again.
+
+There's an example of how to use semantic predicates to parse a language with white-space indented blocks
+in the examples directory.
